@@ -50,8 +50,7 @@ def build_feature_frame(df: pd.DataFrame, params: ModelParams) -> pd.DataFrame:
 
     # 4) Rates and macro
     effr = df["EFFR"]
-    baa10y = df["BAA10Y"].rename("BAA10Y_SPREAD")
-
+    baa10y = df["BAA10Y"]
 
     # 6) Simple transformations / lags (approximate stationarity)
     # Lag macro-type variables by macro_lag_days to simulate info set
@@ -63,18 +62,18 @@ def build_feature_frame(df: pd.DataFrame, params: ModelParams) -> pd.DataFrame:
     features = pd.concat(
         [
             y,
+            vol_lag,  
             sp_ret,
             hyg_ret,
             lqd_ret,
             vxx_ret,
+            sp_x_vxx,  
             credit_spread,
+            credit_spread_sq, 
             credit_spread_change,
+            hyg_x_spread,  
             effr_lag,
             baa10y_lag,
-            vol_lag,           
-            credit_spread_sq,   
-            hyg_x_spread,       
-            sp_x_vxx,       
         ],
         axis=1,
     )

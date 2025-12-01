@@ -7,7 +7,8 @@ from typing import Dict
 class ModelParams:
     # Time window
     end_date: dt.date = dt.date.today()
-    lookback_years: int = 7  # last N years
+    lookback_years_regression: int = 3   # used for model sample
+    lookback_years_diagnostics: int = 7  # used for diagnostics
 
     # Symbols (Stooq / logical)
     sp500_symbol: str = "^GSPC"       # S&P 500 index (mapped from SPX)
@@ -23,7 +24,7 @@ class ModelParams:
     macro_lag_days: int = 5
 
     # Train/test split, CV
-    test_size_fraction: float = 0.3
+    test_size_fraction: float = 0.2
     n_splits: int = 10
     max_iter: int = 10000
     l1_ratios: np.ndarray = np.linspace(0.5, 1.0, 11)
