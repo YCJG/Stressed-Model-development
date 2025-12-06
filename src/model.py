@@ -103,7 +103,7 @@ def fit_models_with_timeseries_cv(
     top_features = coef_nonzero.head(params.top_n_features)
 
     # ----------------------------
-    # Build a small "hyperparameter + RMSE" summary table from cv_results
+    # Build a "hyperparameter + RMSE" summary table from cv_results
     # Note: ElasticNetCV does not expose full grid results as cleanly as GridSearchCV.
     # We'll approximate by evaluating the mean MSE path.
     # ----------------------------
@@ -175,9 +175,8 @@ def report_results(results, params: ModelParams):
     y_test = results["y_test"]
     y_pred_enet = results["y_pred_enet"]
     y_pred_ols = results["y_pred_ols"]
-
     
-    # Separate “normal” and “stress” evaluation. Instead of one RMSE for the whole test set, compute:
+    # Separate “normal” and “stress” evaluation. Instead of only one RMSE for the whole test set, compute:
     # RMSE on normal days (vol below some threshold).
     # RMSE on stress days (top X% of vol or around a known crisis window).
     

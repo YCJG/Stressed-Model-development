@@ -11,10 +11,9 @@ def compute_start_date_regression(params: ModelParams) -> dt.date:
 def compute_start_date_diagnostics(params: ModelParams) -> dt.date:
     return params.end_date - dt.timedelta(days=365 * params.lookback_years_diagnostics)
 
-
 def download_market_data_stooq(params: ModelParams, for_diagnostics: bool = False):
     """
-    Download daily OHLCV data for key market series from Stooq via pandas_datareader.
+    Download daily OHLCV (Open, High, Low, Close, and Volume) data for key market series from Stooq via pandas_datareader.
     We will use the 'Close' column as the price proxy (similar to Adj Close).
 
     Stooq tickers:
@@ -31,7 +30,7 @@ def download_market_data_stooq(params: ModelParams, for_diagnostics: bool = Fals
     )
     end_date = params.end_date
 
-    # Map our logical names to Stooq tickers
+    # Map the logical names to Stooq tickers
     stooq_tickers = {
         "SPX": "^SPX",
         "HYG": "HYG.US",
@@ -54,7 +53,7 @@ def download_market_data_stooq(params: ModelParams, for_diagnostics: bool = Fals
     # Rename columns to match what the rest of the code expects
     market_df.rename(
         columns={
-            "SPX": params.sp500_symbol,      # "^GSPC" in your params
+            "SPX": params.sp500_symbol,      # "^GSPC"
             "HYG": params.hyg_symbol,        # "HYG"
             "LQD": params.lqd_symbol,        # "LQD"
             "VXX": params.vxx_symbol,        # "VXX.US"

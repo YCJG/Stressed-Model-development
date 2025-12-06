@@ -7,8 +7,8 @@ from typing import Dict
 class ModelParams:
     # Time window
     end_date: dt.date = dt.date.today()
-    lookback_years_regression: int = 3   # used for model sample
-    lookback_years_diagnostics: int = 7  # used for diagnostics
+    lookback_years_regression: int = 3   # used for regression
+    lookback_years_diagnostics: int = 7  # used for diagnostics for dispersion data
 
     # Symbols (Stooq / logical)
     sp500_symbol: str = "^GSPC"       # S&P 500 index (mapped from SPX)
