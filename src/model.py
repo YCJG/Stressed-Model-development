@@ -94,7 +94,7 @@ def fit_models_with_timeseries_cv(
     # ----------------------------
     coef_series = pd.Series(enet.coef_, index=X_train.columns, name="coefficient")
     # Drop coefficients that are (almost) zero
-    coef_nonzero = coef_series[coef_series.abs() > 1e-6]
+    coef_nonzero = coef_series[coef_series.abs() > 0.01]
 
     # Sort remaining features by absolute size
     coef_nonzero = coef_nonzero.sort_values(key=lambda s: s.abs(), ascending=False)
